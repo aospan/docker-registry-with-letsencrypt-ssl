@@ -1,5 +1,7 @@
 # Start local docker registry with SSL. Obtain certificate from letsencrypt automatically 
 
+NOTE: change 'repo.jokersys.com' to your domain name in docker-compose.yml file
+
 For starting need to run following command:
 
 `docker-compose up`
