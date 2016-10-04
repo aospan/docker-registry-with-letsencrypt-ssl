@@ -1,0 +1,30 @@
+version: '2'
+services:
+  registry:
+    restart: always
+    image: registry:2
+    ports:
+      - 5000:5000
+    environment:
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/live/repo.jokersys.com/fullchain.pem
+      REGISTRY_HTTP_TLS_KEY: /certs/live/repo.jokersys.com/privkey.pem
+    volumes:
+      - ./registry:/var/lib/registry
+      - ./letsencrypt/:/certs
+
+  lets-nginx:
+    image: smashwilson/lets-nginx
+    restart: always
+    volumes:
+      - "./cache:/cache"
+      - "./letsencrypt:/etc/letsencrypt"
+    links:
+      - registry
+    environment:
+      EMAIL: "aospan@jokersys.com"
+      DOMAIN: "repo.jokersys.com"
+      UPSTREAM: "registry:80"
+    ports:
+      - "80:80"
+      - "443:443"
+
