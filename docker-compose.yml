@@ -23,7 +23,7 @@ services:
     environment:
       EMAIL: "aospan@jokersys.com"
       DOMAIN: "repo.jokersys.com"
-      UPSTREAM: "registry:80"
+      UPSTREAM: "registry:5000"
     ports:
       - "80:80"
       - "443:443"
